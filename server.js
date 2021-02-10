@@ -120,19 +120,18 @@ app.post("/i", (req,res)=> {
 
 });
 
-exports.deleteItem = (req, res) => {
-    console.log("Call from delete", req.body.checkbox);
+app.post('/delete', (req, res) => {
     const checkedItemId = req.body.checkbox;
-    Task.findByIdAndRemove(checkedItemId, function(error) {
+   
+    Book.findByIdAndRemove(checkedItemId, (error)=>{
         if(!error){
-            console.log("Successfully deleted the item.");
-            res.redirect("/i");            
+            res.redirect('/i');
         } else {
-            console.log(error);
+            console.log("Failed to remove an item.");
         }
     });
 
-}
+});
 
 app.listen(5000, ()=>{
     console.log("Server is running on port 5000");
